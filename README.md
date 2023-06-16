@@ -25,6 +25,16 @@ class Model1(nn.Module):
 
 ### **class Model1()**
 
+#### Target:
+    1. Reducing the total parameter count.
+#### Results:
+    1. Parameters: 4,312
+    2. Best Train Accuracy: 99.21
+    3. Best Test Accuracy: 99.00 (15th Epoch), 99.48 (20th Epoch)
+#### Analysis:
+    1. We have tried using learning rate 0.01
+    2. We used StepLR scheduler.
+
 ```ruby
 class Model1(nn.Module):
     def __init__(self):
@@ -100,8 +110,64 @@ class Model1(nn.Module):
         return F.log_softmax(x, dim=-1)
  ```
 
+#### Model1 Summary
+
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1            [-1, 8, 28, 28]              80
+              ReLU-2            [-1, 8, 28, 28]               0
+       BatchNorm2d-3            [-1, 8, 28, 28]              16
+           Dropout-4            [-1, 8, 28, 28]               0
+            Conv2d-5           [-1, 16, 28, 28]           1,168
+              ReLU-6           [-1, 16, 28, 28]               0
+       BatchNorm2d-7           [-1, 16, 28, 28]              32
+           Dropout-8           [-1, 16, 28, 28]               0
+         MaxPool2d-9           [-1, 16, 14, 14]               0
+           Conv2d-10            [-1, 8, 14, 14]             136
+             ReLU-11            [-1, 8, 14, 14]               0
+      BatchNorm2d-12            [-1, 8, 14, 14]              16
+          Dropout-13            [-1, 8, 14, 14]               0
+           Conv2d-14           [-1, 16, 14, 14]           1,168
+             ReLU-15           [-1, 16, 14, 14]               0
+      BatchNorm2d-16           [-1, 16, 14, 14]              32
+          Dropout-17           [-1, 16, 14, 14]               0
+           Conv2d-18           [-1, 32, 14, 14]           4,640
+             ReLU-19           [-1, 32, 14, 14]               0
+      BatchNorm2d-20           [-1, 32, 14, 14]              64
+          Dropout-21           [-1, 32, 14, 14]               0
+        MaxPool2d-22             [-1, 32, 7, 7]               0
+           Conv2d-23             [-1, 10, 7, 7]             330
+             ReLU-24             [-1, 10, 7, 7]               0
+      BatchNorm2d-25             [-1, 10, 7, 7]              20
+          Dropout-26             [-1, 10, 7, 7]               0
+AdaptiveAvgPool2d-27             [-1, 10, 1, 1]               0
+================================================================
+Total params: 7,702
+Trainable params: 7,702
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.96
+Params size (MB): 0.03
+Estimated Total Size (MB): 0.99
+----------------------------------------------------------------
+```
 
 ### **class Model2()**
+
+#### Target:
+    1. Reducing the total parameter count and increasing test accuracy.
+#### Results:
+    1. Parameters: 7,524
+    2. Best Train Accuracy: 99.55 (14th Epoch)
+    3. Best Test Accuracy: 99.16 (12th Epoch)
+#### Analysis:
+    1. We have tried using learning rate 0.01
+    2. We used StepLR scheduler.
+    3. We changed convolution blocks and transition blocks.
+
 
 ```ruby
 class Model2(nn.Module):
@@ -194,8 +260,61 @@ class Model2(nn.Module):
         return F.log_softmax(x, dim=-1)
  ```
 
+#### Model2 Summary
+
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1            [-1, 8, 26, 26]              72
+              ReLU-2            [-1, 8, 26, 26]               0
+       BatchNorm2d-3            [-1, 8, 26, 26]              16
+            Conv2d-4           [-1, 16, 24, 24]           1,152
+              ReLU-5           [-1, 16, 24, 24]               0
+       BatchNorm2d-6           [-1, 16, 24, 24]              32
+            Conv2d-7           [-1, 10, 24, 24]             160
+         MaxPool2d-8           [-1, 10, 12, 12]               0
+            Conv2d-9           [-1, 10, 10, 10]             900
+             ReLU-10           [-1, 10, 10, 10]               0
+      BatchNorm2d-11           [-1, 10, 10, 10]              20
+           Conv2d-12             [-1, 16, 8, 8]           1,440
+             ReLU-13             [-1, 16, 8, 8]               0
+      BatchNorm2d-14             [-1, 16, 8, 8]              32
+           Conv2d-15             [-1, 10, 6, 6]           1,440
+             ReLU-16             [-1, 10, 6, 6]               0
+      BatchNorm2d-17             [-1, 10, 6, 6]              20
+           Conv2d-18             [-1, 10, 4, 4]             900
+             ReLU-19             [-1, 10, 4, 4]               0
+      BatchNorm2d-20             [-1, 10, 4, 4]              20
+           Conv2d-21             [-1, 10, 2, 2]             900
+             ReLU-22             [-1, 10, 2, 2]               0
+      BatchNorm2d-23             [-1, 10, 2, 2]              20
+           Conv2d-24             [-1, 10, 1, 1]             400
+================================================================
+Total params: 7,524
+Trainable params: 7,524
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.45
+Params size (MB): 0.03
+Estimated Total Size (MB): 0.48
+----------------------------------------------------------------
+```
 
 ### **class Model3()**
+
+#### Target:
+    1. Reducing the total parameter count and increasing test accuracy.
+#### Results:
+    1. Parameters: 7,524
+    2. Best Train Accuracy: 99.49 (13th Epoch)
+    3. Best Test Accuracy: 99.17 (13th Epoch)
+#### Analysis:
+    1. We have tried using learning rate 0.01
+    2. We used ReduceLROnPlateau scheduler.
+    3. We changed convolution blocks and transition blocks.
+
 
 ```ruby
 class Model3(nn.Module):
@@ -287,7 +406,47 @@ class Model3(nn.Module):
         x = x.view(-1, 10)
         return F.log_softmax(x, dim=-1)
  ```
+#### Model3 Summary
 
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1            [-1, 8, 26, 26]              72
+              ReLU-2            [-1, 8, 26, 26]               0
+       BatchNorm2d-3            [-1, 8, 26, 26]              16
+            Conv2d-4           [-1, 16, 24, 24]           1,152
+              ReLU-5           [-1, 16, 24, 24]               0
+       BatchNorm2d-6           [-1, 16, 24, 24]              32
+            Conv2d-7           [-1, 10, 24, 24]             160
+         MaxPool2d-8           [-1, 10, 12, 12]               0
+            Conv2d-9           [-1, 10, 10, 10]             900
+             ReLU-10           [-1, 10, 10, 10]               0
+      BatchNorm2d-11           [-1, 10, 10, 10]              20
+           Conv2d-12             [-1, 16, 8, 8]           1,440
+             ReLU-13             [-1, 16, 8, 8]               0
+      BatchNorm2d-14             [-1, 16, 8, 8]              32
+           Conv2d-15             [-1, 10, 6, 6]           1,440
+             ReLU-16             [-1, 10, 6, 6]               0
+      BatchNorm2d-17             [-1, 10, 6, 6]              20
+           Conv2d-18             [-1, 10, 4, 4]             900
+             ReLU-19             [-1, 10, 4, 4]               0
+      BatchNorm2d-20             [-1, 10, 4, 4]              20
+           Conv2d-21             [-1, 10, 2, 2]             900
+             ReLU-22             [-1, 10, 2, 2]               0
+      BatchNorm2d-23             [-1, 10, 2, 2]              20
+           Conv2d-24             [-1, 10, 1, 1]             400
+================================================================
+Total params: 7,524
+Trainable params: 7,524
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.45
+Params size (MB): 0.03
+Estimated Total Size (MB): 0.48
+----------------------------------------------------------------
+```
 
  
 ### utils.py
@@ -396,45 +555,3 @@ Test set: Average loss: 0.0265, Accuracy: 9917/10000 (99.17%)
 
 
 
-## Model Summary
-
-```
-----------------------------------------------------------------
-        Layer (type)               Output Shape         Param #
-================================================================
-            Conv2d-1            [-1, 8, 26, 26]              72
-              ReLU-2            [-1, 8, 26, 26]               0
-       BatchNorm2d-3            [-1, 8, 26, 26]              16
-            Conv2d-4           [-1, 16, 24, 24]           1,152
-              ReLU-5           [-1, 16, 24, 24]               0
-       BatchNorm2d-6           [-1, 16, 24, 24]              32
-            Conv2d-7           [-1, 10, 24, 24]             160
-         MaxPool2d-8           [-1, 10, 12, 12]               0
-            Conv2d-9           [-1, 10, 10, 10]             900
-             ReLU-10           [-1, 10, 10, 10]               0
-      BatchNorm2d-11           [-1, 10, 10, 10]              20
-           Conv2d-12             [-1, 16, 8, 8]           1,440
-             ReLU-13             [-1, 16, 8, 8]               0
-      BatchNorm2d-14             [-1, 16, 8, 8]              32
-           Conv2d-15             [-1, 10, 6, 6]           1,440
-             ReLU-16             [-1, 10, 6, 6]               0
-      BatchNorm2d-17             [-1, 10, 6, 6]              20
-           Conv2d-18             [-1, 10, 4, 4]             900
-             ReLU-19             [-1, 10, 4, 4]               0
-      BatchNorm2d-20             [-1, 10, 4, 4]              20
-           Conv2d-21             [-1, 10, 2, 2]             900
-             ReLU-22             [-1, 10, 2, 2]               0
-      BatchNorm2d-23             [-1, 10, 2, 2]              20
-           Conv2d-24             [-1, 10, 1, 1]             400
-================================================================
-Total params: 7,524
-Trainable params: 7,524
-Non-trainable params: 0
-----------------------------------------------------------------
-Input size (MB): 0.00
-Forward/backward pass size (MB): 0.45
-Params size (MB): 0.03
-Estimated Total Size (MB): 0.48
-----------------------------------------------------------------
-
-```
