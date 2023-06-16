@@ -309,8 +309,8 @@ Estimated Total Size (MB): 0.48
     1. Reducing the total parameter count and increasing test accuracy.
 #### Results:
     1. Parameters: 7,524
-    2. Best Train Accuracy: 99.49 (13th Epoch)
-    3. Best Test Accuracy: 99.17 (13th Epoch)
+    2. Best Train Accuracy: 99.50 (15th Epoch)
+    3. Best Test Accuracy: 99.28 (12th Epoch)
 #### Analysis:
     1. We have tried using learning rate 0.01
     2. We used ReduceLROnPlateau scheduler.
